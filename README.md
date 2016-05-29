@@ -1,6 +1,7 @@
 ﻿# trungnt-android3-assignment14
 
 ##Yêu cầu
++ [Cái tiến bài The Weather sử dụng api dữ liệu Thời tiết Hà Nội và có lưu vào SQL Lite](https://github.com/trantrungnt/LearnTheWeather)
 + App của mình mỗi ngày sau khi lấy dữ liệu mới về thì xóa toàn bộ dữ liệu cũ hơn 1 ngày.(dữ liệu lấy tự api đọc mới xong thì lưu vào SQL Lite)
 
 ##Kiến thức cần để làm
