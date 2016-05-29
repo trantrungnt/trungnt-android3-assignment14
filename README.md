@@ -12,3 +12,7 @@
 ![SQLLite4](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%204_zpsb0pdz61p.jpg)
 ![SQLLite5](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%205_zpsrradptrn.jpg)
 ![SQLLite6](http://i477.photobucket.com/albums/rr132/trungepu/truy%20van%20SQL_zpsrfchf6tr.jpg)
+
+##Môi trường phát triển
++ Bộ công cụ Android Studio 2.1
++ Máy ảo Genymotion sử dụng api min 17 và max api 23
