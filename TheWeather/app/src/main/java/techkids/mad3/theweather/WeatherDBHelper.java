@@ -9,7 +9,7 @@ import android.util.Log;
  * Created by TrungNT on 5/30/2016.
  */
 public class WeatherDBHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 0;
+    private static final int VERSION = 5;
     private static final String DB_NAME = "Weather.db";
 
     public static final String WEATHER_TABLE_NAME = "tblWeather";
@@ -35,10 +35,10 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
         final String CREATE_WEATHER_TABLE = "CREATE TABLE "
                 + WEATHER_TABLE_NAME + " ("
                 + _ID + " INTEGER PRIMARY KEY NOT NULL, "
-                + CREATE_AT + "DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                + CREATE_AT + " DATETIME DEFAULT CURRENT_TIMESTAMP, "
                 + DESCRIPTION + " TEXT NOT NULL, "
-                + TEMPERATURE_MIN + "FLOAT NOT NULL, "
-                + TEMPERATURE_MAX + "FLOAT NOT NULL, "
+                + TEMPERATURE_MIN + " FLOAT NOT NULL, "
+                + TEMPERATURE_MAX + " FLOAT NOT NULL, "
                 + TEMPERATURE + " FLOAT NOT NULL)";
 
         Log.d("sql onCreate", CREATE_WEATHER_TABLE);

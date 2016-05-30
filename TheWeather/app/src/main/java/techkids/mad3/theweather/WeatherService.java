@@ -154,10 +154,10 @@ public class WeatherService extends IntentService {
 
         try{
             contentValues = new ContentValues();
+            contentValues.put(WeatherDBHelper.DESCRIPTION, descriptionTemp);
             contentValues.put(WeatherDBHelper.TEMPERATURE_MIN, minTemp);
             contentValues.put(WeatherDBHelper.TEMPERATURE_MAX, maxTemp);
             contentValues.put(WeatherDBHelper.TEMPERATURE, mainTemp);
-            contentValues.put(WeatherDBHelper.DESCRIPTION, descriptionTemp);
 
             database.beginTransaction();
             database.insert(WeatherDBHelper.WEATHER_TABLE_NAME, null, contentValues);
