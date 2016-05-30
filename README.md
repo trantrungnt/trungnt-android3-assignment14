@@ -23,4 +23,4 @@
 + [Android insert datetime value in sqlite database](http://tips.androidhive.info/2013/10/android-insert-datetime-value-in-sqlite-database/)
 + [datatype3 in sqlite](http://www.sqlite.org/datatype3.html)
 + [ORMLite](http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_1.html#Getting-Started)
-
++ [Connect db SQLite to Android](http://developinginandroid.blogspot.com/2014/01/connect-db-sqlite-to-android-with.html)
