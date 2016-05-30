@@ -5,8 +5,10 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
@@ -34,6 +36,9 @@ import java.util.GregorianCalendar;
 public class WeatherService extends IntentService {
     private Bundle bundleAlarm;
     private Intent intentAlarm;
+    private WeatherDBHelper sqliteOpenDbHelper;
+    private SQLiteDatabase database;
+    private ContentValues contentValues;
 
     public WeatherService() {
         super("WeatherService");
@@ -133,5 +138,33 @@ public class WeatherService extends IntentService {
         remoteViews.setTextViewText(R.id.tvMainTemp, tempMain.substring(0, 5) + (char) 0x00B0 + "C");
 
         return builder.build();
+    }
+
+    //method sotorage data in SQLite
+    private void insertDataToSQLite(String minTemp,
+                                    String maxTemp,
+                                    String mainTemp,
+                                    String descriptionTemp)
+    {
+        sqliteOpenDbHelper = new WeatherDBHelper(this);
+        database = sqliteOpenDbHelper.getWritableDatabase();
+
+        try{
+            contentValues = new ContentValues();
+            contentValues.put(WeatherDBHelper.TEMPERATURE_MIN, minTemp);
+            contentValues.put(WeatherDBHelper.TEMPERATURE_MAX, maxTemp);
+            contentValues.put(WeatherDBHelper.TEMPERATURE, mainTemp);
+            contentValues.put(WeatherDBHelper.DESCRIPTION, descriptionTemp);
+
+            database.beginTransaction();
+            database.insert(WeatherDBHelper.WEATHER_TABLE_NAME, null, contentValues);
+            database.setTransactionSuccessful();
+            database.endTransaction();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            database.close();
+        }
     }
 }

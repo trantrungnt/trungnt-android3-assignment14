@@ -37,8 +37,8 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
                 + _ID + " INTEGER PRIMARY KEY NOT NULL, "
                 + CREATE_AT + "DATETIME DEFAULT CURRENT_TIMESTAMP, "
                 + DESCRIPTION + " TEXT NOT NULL, "
-                + TEMPERATURE_MIN + "FLOAT NOT NULL"
-                + TEMPERATURE_MAX + "FLOAT NOT NULL"
+                + TEMPERATURE_MIN + "FLOAT NOT NULL, "
+                + TEMPERATURE_MAX + "FLOAT NOT NULL, "
                 + TEMPERATURE + " FLOAT NOT NULL)";
 
         Log.d("sql onCreate", CREATE_WEATHER_TABLE);
