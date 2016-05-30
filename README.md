@@ -5,6 +5,8 @@
 + App của mình mỗi ngày sau khi lấy dữ liệu mới về thì xóa toàn bộ dữ liệu cũ hơn 1 ngày.(dữ liệu lấy tự api đọc mới xong thì lưu vào SQL Lite)
 
 ##Kiến thức cần để làm
++ [SQLite Basic](https://youtu.be/LS2fBgUiOSI)
+
 ![SQLLite0](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%200_zpsgd8xvcqx.jpg)
 ![SQLLite1](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%201_zps9nqf19fr.jpg)
 ![SQLLite2](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%202_zpss9s5nksj.jpg)
