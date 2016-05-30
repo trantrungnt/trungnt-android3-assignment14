@@ -18,3 +18,7 @@
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
 + Máy ảo Genymotion sử dụng api min 17 và max api 23
+
+##Tham khảo
++ [Android insert datetime value in sqlite database](http://tips.androidhive.info/2013/10/android-insert-datetime-value-in-sqlite-database/)
+
