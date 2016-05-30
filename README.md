@@ -24,3 +24,4 @@
 + [datatype3 in sqlite](http://www.sqlite.org/datatype3.html)
 + [ORMLite](http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_1.html#Getting-Started)
 + [Connect db SQLite to Android](http://developinginandroid.blogspot.com/2014/01/connect-db-sqlite-to-android-with.html)
++ [How do I see database tables in Android Studio](https://www.quora.com/How-do-I-see-database-tables-in-Android-Studio)
