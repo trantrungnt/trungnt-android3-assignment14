@@ -94,6 +94,9 @@ public class WeatherService extends IntentService {
                 alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
                 //Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 
+                //storage Data in SQLite
+                insertDataToSQLite(strDisplayTempMin, strDisplayTempMax, strDisplayMainTemp, weatherDescription);
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
