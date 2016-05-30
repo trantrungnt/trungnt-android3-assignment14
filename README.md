@@ -21,4 +21,5 @@
 
 ##Tham khảo
 + [Android insert datetime value in sqlite database](http://tips.androidhive.info/2013/10/android-insert-datetime-value-in-sqlite-database/)
++ [datatype3 in sqlite](http://www.sqlite.org/datatype3.html)
 
