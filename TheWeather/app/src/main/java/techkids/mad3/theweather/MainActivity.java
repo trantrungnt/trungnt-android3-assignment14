@@ -16,10 +16,16 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 //    public static String NOTIFICATION_ID = "notification-id";
 //    public static String NOTIFICATION = "notification";
+
+/*/*SELECT * FROM tblWeather where Create_at*/
+//select * from tblWeather where Datetime('now') > Create_at;
+//select * from tblWeather where strftime('%H:%M:%S', Create_at ) > strftime('%H:%M:%S', '2016-05-31 03:56:50');
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = sqliteOpenDbHelper.getWritableDatabase();
 
         String[] projections = {WeatherDBHelper._ID,  WeatherDBHelper.CREATE_AT, WeatherDBHelper.DESCRIPTION};
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        simpleDateFormat.format(cal.getTime());
+        Log.d("Current Time ", String.valueOf(simpleDateFormat.format(cal.getTime())));
 
         Cursor cursor = db.query(WeatherDBHelper.WEATHER_TABLE_NAME,
                 projections,
