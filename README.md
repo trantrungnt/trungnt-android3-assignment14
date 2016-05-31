@@ -28,3 +28,4 @@
 + [Using your own sqlite database in Android application](http://blog.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/)
 + [SQLite Open Helper with custom path](http://snippetrepo.com/snippets/sqliteopenhelper-with-custom-path)
 + [Android SQLite database](http://www.tutorialspoint.com/android/android_sqlite_database.htm)
++ [How to compare dates in Java](http://www.mkyong.com/java/how-to-compare-dates-in-java/)
