@@ -40,6 +40,14 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss"
 
 ```
 
++ Trong SQL
+```
+/*SELECT * FROM tblWeather where Create_at*/
+select Datetime('now');
+/*select * from tblWeather where Datetime('now') > Create_at;*/
+/*select * from tblWeather where strftime('%H:%M:%S', Create_at ) > strftime('%H:%M:%S', '2016-05-31 03:56:50');*/
+```
+
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
 + Máy ảo Genymotion sử dụng api min 17 và max api 23
