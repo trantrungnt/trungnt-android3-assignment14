@@ -2,7 +2,7 @@
 
 ##Yêu cầu
 + [Cái tiến bài The Weather sử dụng api dữ liệu Thời tiết Hà Nội và có lưu vào SQL Lite](https://github.com/trantrungnt/LearnTheWeather)
-+ App của mình mỗi ngày sau khi lấy dữ liệu mới về thì xóa toàn bộ dữ liệu cũ hơn 1 ngày.(dữ liệu lấy tự api đọc mới xong thì lưu vào SQL Lite)
++ App của mình mỗi ngày sau khi lấy dữ liệu mới về thì xóa toàn bộ dữ liệu cũ hơn 1 ngày.(dữ liệu lấy từ api đọc mới xong thì lưu vào SQL Lite)
 
 ##Kiến thức cần để làm
 + [SQLite Basic](https://youtu.be/LS2fBgUiOSI)
@@ -14,6 +14,31 @@
 ![SQLLite4](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%204_zpsb0pdz61p.jpg)
 ![SQLLite5](http://i477.photobucket.com/albums/rr132/trungepu/SQL%20Basic%205_zpsrradptrn.jpg)
 ![SQLLite6](http://i477.photobucket.com/albums/rr132/trungepu/truy%20van%20SQL_zpsrfchf6tr.jpg)
+
+##Chú ý khi code
++ So sánh ngày hiện tại với ngày cần so sánh
+```
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        simpleDateFormat.format(cal.getTime());
+        Log.d("Current Time ", String.valueOf(simpleDateFormat.format(cal.getTime())));
+
+        try {
+            java.util.Date date1 = simpleDateFormat.parse("2016-01-12 03:56:50");
+            java.util.Date date2 = simpleDateFormat.parse("2016-11-12 04:26:00");
+            java.util.Date currentDate = new java.util.Date();
+
+            if (date1.compareTo(currentDate)<0)
+                Log.d("Message", "date1 before current date");
+
+            if (date2.compareTo(currentDate)>0)
+                Log.d("Message", "date2 after current date");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+```
 
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
