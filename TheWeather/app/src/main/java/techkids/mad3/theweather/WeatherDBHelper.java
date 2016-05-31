@@ -23,8 +23,9 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
 
 
     public static final int ID_INDEX = 0;
-    public static final int DESCRIPTION_INDEX = 1;
-    public static final int TEMPERATURE_INDEX = 2;
+    public static final int CREATE_AT_INDEX = 1;
+    public static final int DESCRIPTION_INDEX = 2;
+    public static final int TEMPERATURE_INDEX = 3;
 
     public WeatherDBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);

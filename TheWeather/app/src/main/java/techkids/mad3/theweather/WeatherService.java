@@ -95,7 +95,7 @@ public class WeatherService extends IntentService {
                 //Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 
                 //storage Data in SQLite
-                insertDataToSQLite(strDisplayTempMin, strDisplayTempMax, strDisplayMainTemp, weatherDescription);
+                //insertDataToSQLite(strDisplayTempMin, strDisplayTempMax, strDisplayMainTemp, weatherDescription);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
