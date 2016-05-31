@@ -64,3 +64,4 @@ select Datetime('now');
 + [How to compare dates in Java](http://www.mkyong.com/java/how-to-compare-dates-in-java/)
 + [Compare Date Time in Java](http://www.tutorialspoint.com/java/java_date_time.htm)
 + [Alarms database - Alarm Manager](http://www.java2s.com/Open-Source/Android_Free_Code/Example/course/com_geoalarms_databaseAlarmManager_java.htm)
++ [Android Alarm Manager](http://www.learn-android-easily.com/2013/05/android-alarm-manager_31.html)
