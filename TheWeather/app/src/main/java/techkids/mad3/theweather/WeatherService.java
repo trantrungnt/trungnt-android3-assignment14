@@ -24,6 +24,8 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -91,7 +93,13 @@ public class WeatherService extends IntentService {
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
                 //set the alarm for particular time
-                alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+                //alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 10);
+                calendar.set(Calendar.MINUTE, 5);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+
                 //Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 
                 //storage Data in SQLite
@@ -169,5 +177,12 @@ public class WeatherService extends IntentService {
         }finally {
             database.close();
         }
+    }
+
+    private void deleteWeaherByCurrentDateTime()
+    {
+        sqliteOpenDbHelper = new WeatherDBHelper(this);
+        database = sqliteOpenDbHelper.getWritableDatabase();
+        database.delete(WeatherDBHelper.WEATHER_TABLE_NAME, "Create_at < Datetime('now')", null);
     }
 }

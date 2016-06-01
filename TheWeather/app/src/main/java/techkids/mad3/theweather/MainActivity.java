@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -39,29 +40,51 @@ public class MainActivity extends AppCompatActivity {
         String[] projections = {WeatherDBHelper._ID,  WeatherDBHelper.CREATE_AT, WeatherDBHelper.DESCRIPTION};
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        simpleDateFormat.format(cal.getTime());
-        Log.d("Current Time ", String.valueOf(simpleDateFormat.format(cal.getTime())));
+//        Calendar cal = Calendar.getInstance();
+//        simpleDateFormat.format(cal.getTime());
+//        Log.d("Current Time ", String.valueOf(simpleDateFormat.format(cal.getTime())));
 
-        Cursor cursor = db.query(WeatherDBHelper.WEATHER_TABLE_NAME,
-                projections,
-                null,
-                null,
-                null,
-                null,
-                null);
-        while(cursor.moveToNext()) {
-            long id = cursor.getLong(WeatherDBHelper.ID_INDEX);
-            String description = cursor.getString(WeatherDBHelper.DESCRIPTION_INDEX);
-            String create_at = cursor.getString(WeatherDBHelper.CREATE_AT_INDEX);
-            //Double temp = cursor.getDouble(0);
+        try {
+            java.util.Date date1 = simpleDateFormat.parse("2016-01-12 03:56:50");
+            java.util.Date date2 = simpleDateFormat.parse("2016-11-12 04:26:00");
+            java.util.Date currentDate = new java.util.Date();
 
-            Log.d("result sql:",
-                    "ID: " + id
-                            + " Create_at: " + create_at
-                            + " Description: " + description);
-                           // + " Temperature: " + temp);
+            if (date1.compareTo(currentDate)<0)
+                Log.d("Message", "date1 before current date");
+
+            if (date2.compareTo(currentDate)>0)
+                Log.d("Message", "date2 after current date");
+
+
+            Cursor cursor = db.query(WeatherDBHelper.WEATHER_TABLE_NAME,
+                    projections,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            while(cursor.moveToNext()) {
+                long id = cursor.getLong(WeatherDBHelper.ID_INDEX);
+                String description = cursor.getString(WeatherDBHelper.DESCRIPTION_INDEX);
+                String create_at = cursor.getString(WeatherDBHelper.CREATE_AT_INDEX);
+                //Double temp = cursor.getDouble(0);
+                java.util.Date getCreateAt = simpleDateFormat.parse(create_at);
+
+                if (getCreateAt.compareTo(currentDate)<0)
+                                    Log.d("result sql:",
+                                            "ID: " + id
+                                                    + " Create_at: " + create_at
+                                                    + " Description: " + description);
+                                    // + " Temperature: " + temp);
+                else
+                    Log.d("result sql", "No record");
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
 
     }
 
