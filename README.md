@@ -66,3 +66,4 @@ select Datetime('now');
 + [Alarms database - Alarm Manager](http://www.java2s.com/Open-Source/Android_Free_Code/Example/course/com_geoalarms_databaseAlarmManager_java.htm)
 + [Android Alarm Manager](http://www.learn-android-easily.com/2013/05/android-alarm-manager_31.html)
 + [Set and delete multiple Alarm Manager with SQLite](http://1-vopros-1-otvet.ru/set-and-delete-multiple-alarmmanager-with-sqlite-33983233/)
++ [Alarm Manager](https://developer.android.com/training/scheduling/alarms.html)
