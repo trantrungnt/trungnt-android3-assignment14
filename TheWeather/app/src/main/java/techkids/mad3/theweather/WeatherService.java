@@ -103,8 +103,11 @@ public class WeatherService extends IntentService {
                 bundleAlarmStorageData.putString("maxTemp", strDisplayTempMax);
                 bundleAlarmStorageData.putString("mainTemp", strDisplayMainTemp);
                 bundleAlarmStorageData.putString("descriptionTemp", weatherDescription);
+
+                AlarmManager alarmManagerStorageData = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 intentAlarmStorageData.putExtras(bundleAlarmStorageData);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, PendingIntent.getBroadcast(this, 0,  intentAlarmStorageData, PendingIntent.FLAG_UPDATE_CURRENT));
+                PendingIntent pendingIntentStorageData = PendingIntent.getBroadcast(this, 8, intentAlarmStorageData, PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmManagerStorageData.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, pendingIntentStorageData);
                 //Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
                 //storage Data in SQLite
                 //insertDataToSQLite(strDisplayTempMin, strDisplayTempMax, strDisplayMainTemp, weatherDescription);

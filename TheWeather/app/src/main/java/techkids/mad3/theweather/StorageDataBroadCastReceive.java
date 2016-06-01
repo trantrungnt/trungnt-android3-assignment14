@@ -12,6 +12,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by TrungNT on 6/1/2016.
@@ -23,7 +24,7 @@ public class StorageDataBroadCastReceive extends BroadcastReceiver {
     private Bundle getBundleData;
     private String minTemp, maxTemp, mainTemp, descriptionTemp;
     private SimpleDateFormat simpleDateFormat;
-    private Date currentDate;
+    private Date currentDate, createAtDate;
     private SQLiteDatabase db;
 
     @Override
@@ -34,27 +35,20 @@ public class StorageDataBroadCastReceive extends BroadcastReceiver {
         mainTemp = getBundleData.getString("mainTemp");
         descriptionTemp = getBundleData.getString("descriptionTemp");
 
-        currentDate = new Date();
-
         try{
-            Cursor cursor = db.query(WeatherDBHelper.WEATHER_TABLE_NAME,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null);
-            while(cursor.moveToNext()) {
-                long id = cursor.getLong(WeatherDBHelper.ID_INDEX);
-                String create_at = cursor.getString(WeatherDBHelper.CREATE_AT_INDEX);
-                Date getCreateAt = simpleDateFormat.parse(create_at);
 
-                if (getCreateAt.compareTo(currentDate)<0)
-                {
-                    deleteWeaherByCurrentDateTime(context, id);
-                }
-
+            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+            currentDate = new Date();
+            sqliteOpenDbHelper = new WeatherDBHelper(context);
+            db = sqliteOpenDbHelper.getWritableDatabase();
+            List<Weather> weathers = sqliteOpenDbHelper.getAllContacts();
+            for (Weather wt : weathers)
+            {
+                createAtDate = simpleDateFormat.parse(wt.getCreateAt());
+                if (createAtDate.compareTo(currentDate)<0)
+                    Log.d("Msg", "Weather " + wt.getId() + " before current date");
             }
+
 
         }catch (ParseException e) {
             e.printStackTrace();

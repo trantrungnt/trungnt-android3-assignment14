@@ -1,9 +1,13 @@
 package techkids.mad3.theweather;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by TrungNT on 5/30/2016.
@@ -50,5 +54,28 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + WEATHER_TABLE_NAME);
         onCreate(db);
+    }
+
+    public List<Weather> getAllContacts() {
+        List<Weather> contactList = new ArrayList<Weather>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + WEATHER_TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Weather weather = new Weather();
+                weather.setId(Integer.parseInt(cursor.getString(0)));
+                weather.setCreateAt(cursor.getColumnName(CREATE_AT_INDEX));
+                // Adding contact to list
+                contactList.add(weather);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
     }
 }

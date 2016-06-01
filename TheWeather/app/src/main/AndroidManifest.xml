@@ -23,6 +23,7 @@
             android:exported="false">
         </service>
         <receiver android:name=".NotificationInformation" />
+        <receiver android:name=".StorageDataBroadCastReceive" />
     </application>
 
 </manifest>
