@@ -36,11 +36,8 @@ import java.util.GregorianCalendar;
  * helper methods.
  */
 public class WeatherService extends IntentService {
-    private Bundle bundleAlarm;
-    private Intent intentAlarm;
-    private WeatherDBHelper sqliteOpenDbHelper;
-    private SQLiteDatabase database;
-    private ContentValues contentValues;
+    private Bundle bundleAlarmStorageData;
+    private Intent intentAlarm, intentAlarmStorageData;
 
     public WeatherService() {
         super("WeatherService");
@@ -82,7 +79,7 @@ public class WeatherService extends IntentService {
                 // we fetch  the current time in milliseconds and added 1 day time
                 // i.e. 24*60*60*1000= 86,400,000   milliseconds in a day
                 //Long time = new GregorianCalendar().getTimeInMillis()+24*60*60*1000;
-                long time = SystemClock.elapsedRealtime() + 10000;
+                //long time = SystemClock.elapsedRealtime() + 10000;
 
                 intentAlarm = new Intent(WeatherService.this, NotificationInformation.class);
                 intentAlarm.putExtra(NotificationInformation.NOTIFICATION_ID, 1);
@@ -100,8 +97,15 @@ public class WeatherService extends IntentService {
                 calendar.set(Calendar.MINUTE, 5);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 
+                intentAlarmStorageData = new Intent(WeatherService.this, StorageDataBroadCastReceive.class);
+                bundleAlarmStorageData = new Bundle();
+                bundleAlarmStorageData.putString("minTemp", strDisplayTempMin);
+                bundleAlarmStorageData.putString("maxTemp", strDisplayTempMax);
+                bundleAlarmStorageData.putString("mainTemp", strDisplayMainTemp);
+                bundleAlarmStorageData.putString("descriptionTemp", weatherDescription);
+                intentAlarmStorageData.putExtras(bundleAlarmStorageData);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, PendingIntent.getBroadcast(this, 0,  intentAlarmStorageData, PendingIntent.FLAG_UPDATE_CURRENT));
                 //Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
-
                 //storage Data in SQLite
                 //insertDataToSQLite(strDisplayTempMin, strDisplayTempMax, strDisplayMainTemp, weatherDescription);
 
@@ -151,38 +155,5 @@ public class WeatherService extends IntentService {
         return builder.build();
     }
 
-    //method sotorage data in SQLite
-    private void insertDataToSQLite(String minTemp,
-                                    String maxTemp,
-                                    String mainTemp,
-                                    String descriptionTemp)
-    {
-        sqliteOpenDbHelper = new WeatherDBHelper(this);
-        database = sqliteOpenDbHelper.getWritableDatabase();
 
-        try{
-            contentValues = new ContentValues();
-            contentValues.put(WeatherDBHelper.DESCRIPTION, descriptionTemp);
-            contentValues.put(WeatherDBHelper.TEMPERATURE_MIN, minTemp);
-            contentValues.put(WeatherDBHelper.TEMPERATURE_MAX, maxTemp);
-            contentValues.put(WeatherDBHelper.TEMPERATURE, mainTemp);
-
-            database.beginTransaction();
-            database.insert(WeatherDBHelper.WEATHER_TABLE_NAME, null, contentValues);
-            database.setTransactionSuccessful();
-            database.endTransaction();
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }finally {
-            database.close();
-        }
-    }
-
-    private void deleteWeaherByCurrentDateTime()
-    {
-        sqliteOpenDbHelper = new WeatherDBHelper(this);
-        database = sqliteOpenDbHelper.getWritableDatabase();
-        database.delete(WeatherDBHelper.WEATHER_TABLE_NAME, "Create_at < Datetime('now')", null);
-    }
 }
