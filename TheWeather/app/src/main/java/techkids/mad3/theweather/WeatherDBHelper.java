@@ -13,7 +13,7 @@ import java.util.List;
  * Created by TrungNT on 5/30/2016.
  */
 public class WeatherDBHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 5;
+    private static final int VERSION = 1;
     private static final String DB_NAME = "Weather.db";
 
     public static final String WEATHER_TABLE_NAME = "tblWeather";
@@ -69,7 +69,7 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
             do {
                 Weather weather = new Weather();
                 weather.setId(Integer.parseInt(cursor.getString(0)));
-                weather.setCreateAt(cursor.getColumnName(CREATE_AT_INDEX));
+                weather.setCreateAt(cursor.getString(CREATE_AT_INDEX));
                 // Adding contact to list
                 contactList.add(weather);
             } while (cursor.moveToNext());
@@ -77,5 +77,17 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
 
         // return contact list
         return contactList;
+    }
+
+    public int getWeatherCount() {
+        int count;
+        String countQuery = "SELECT * FROM " + WEATHER_TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        count = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return count;
     }
 }

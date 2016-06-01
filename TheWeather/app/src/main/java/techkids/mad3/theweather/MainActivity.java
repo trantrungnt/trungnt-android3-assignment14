@@ -70,14 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 //Double temp = cursor.getDouble(0);
                 java.util.Date getCreateAt = simpleDateFormat.parse(create_at);
 
-                if (getCreateAt.compareTo(currentDate)<0)
+                //if (getCreateAt.compareTo(currentDate)<0)
                                     Log.d("result sql:",
                                             "ID: " + id
                                                     + " Create_at: " + create_at
                                                     + " Description: " + description);
                                     // + " Temperature: " + temp);
-                else
-                    Log.d("result sql", "No record");
+                //else
+                  //  Log.d("result sql", "No record");
             }
 
 

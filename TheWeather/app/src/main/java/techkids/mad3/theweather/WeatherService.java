@@ -93,8 +93,8 @@ public class WeatherService extends IntentService {
                 //alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 10);
-                calendar.set(Calendar.MINUTE, 5);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 17);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 
                 intentAlarmStorageData = new Intent(WeatherService.this, StorageDataBroadCastReceive.class);

@@ -42,15 +42,20 @@ public class StorageDataBroadCastReceive extends BroadcastReceiver {
             sqliteOpenDbHelper = new WeatherDBHelper(context);
             db = sqliteOpenDbHelper.getWritableDatabase();
             List<Weather> weathers = sqliteOpenDbHelper.getAllContacts();
+            Log.d("count" , String.valueOf(sqliteOpenDbHelper.getWeatherCount()));
+
             for (Weather wt : weathers)
             {
-                createAtDate = simpleDateFormat.parse(wt.getCreateAt());
-                if (createAtDate.compareTo(currentDate)<0)
-                    Log.d("Msg", "Weather " + wt.getId() + " before current date");
+                Log.d("create at", simpleDateFormat.parse(wt.getCreateAt()).toString());
+                createAtDate = simpleDateFormat.parse(wt.getCreateAt().toString());
+                if (createAtDate.compareTo(currentDate)<0) {
+                    Log.d("Msg", "Weather " + wt.getId() + " before current date " + wt.getCreateAt().toString());
+                    Log.d("Count1", String.valueOf(weathers.size()));
+                }
             }
 
 
-        }catch (ParseException e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
 
