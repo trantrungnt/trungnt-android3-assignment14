@@ -48,6 +48,16 @@ select Datetime('now');
 /*select * from tblWeather where strftime('%H:%M:%S', Create_at ) > strftime('%H:%M:%S', '2016-05-31 03:56:50');*/
 ```
 
++ Sử dụng Alarm Manager để hẹn giờ làm gì đó. Ở đây, ta hẹn lúc 10 giờ 5 phút thì bắt đầu hiển thị thông báo thời tiết, sau đó, 2 phút sau lại thông báo tiếp
+```
+     Calendar calendar = Calendar.getInstance();
+     calendar.setTimeInMillis(System.currentTimeMillis());
+     calendar.set(Calendar.HOUR_OF_DAY, 10);
+     calendar.set(Calendar.MINUTE, 5);
+     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 2, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+```
+
+
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
 + Máy ảo Genymotion sử dụng api min 17 và max api 23
