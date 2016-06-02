@@ -136,7 +136,7 @@ public class WeatherService extends IntentService {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 // Set Icon
-                .setSmallIcon(R.drawable.moderate)
+                .setSmallIcon(R.drawable.sunny)
                 // Set Ticker Message
                 .setTicker(tempDescription + " in Ha Noi, Viet Nam")
                 // Dismiss Notification
@@ -147,7 +147,7 @@ public class WeatherService extends IntentService {
                 .setContent(remoteViews);
 
         // Locate and set the Image into customnotificationtext.xml ImageViews
-        remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.moderate);
+        remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.sunny);
 
         // Locate and set the Text into customnotificationtext.xml TextViews
         remoteViews.setTextViewText(R.id.tvDescriptionTemp, tempDescription);
