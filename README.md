@@ -78,3 +78,4 @@ select Datetime('now');
 + [Set and delete multiple Alarm Manager with SQLite](http://1-vopros-1-otvet.ru/set-and-delete-multiple-alarmmanager-with-sqlite-33983233/)
 + [Alarm Manager](https://developer.android.com/training/scheduling/alarms.html)
 + [Android SQLite database tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/)
++ [How to create insert update and delete sqlite database using Sqlite Open Helper](http://howcanicode.com/how-to-create-insert-update-and-delete-sqlite-database-using-sqliteopenhelper/)
