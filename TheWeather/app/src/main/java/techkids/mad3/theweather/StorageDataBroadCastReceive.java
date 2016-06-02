@@ -26,6 +26,7 @@ public class StorageDataBroadCastReceive extends BroadcastReceiver {
     private SimpleDateFormat simpleDateFormat;
     private Date currentDate, createAtDate;
     private SQLiteDatabase db;
+    private int countRows;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -42,25 +43,30 @@ public class StorageDataBroadCastReceive extends BroadcastReceiver {
             sqliteOpenDbHelper = new WeatherDBHelper(context);
             db = sqliteOpenDbHelper.getWritableDatabase();
             List<Weather> weathers = sqliteOpenDbHelper.getAllContacts();
-            Log.d("count" , String.valueOf(sqliteOpenDbHelper.getWeatherCount()));
-
-            for (Weather wt : weathers)
-            {
-                Log.d("create at", simpleDateFormat.parse(wt.getCreateAt()).toString());
-                createAtDate = simpleDateFormat.parse(wt.getCreateAt().toString());
-                if (createAtDate.compareTo(currentDate)<0) {
-                    Log.d("Msg", "Weather " + wt.getId() + " before current date " + wt.getCreateAt().toString());
-                    Log.d("Count1", String.valueOf(weathers.size()));
+            countRows = sqliteOpenDbHelper.getWeatherCount();
+            if (countRows==0)
+                insertDataToSQLite(context, minTemp, maxTemp, mainTemp, descriptionTemp);
+            else
+                for (Weather wt : weathers)
+                {
+                    Log.d("create at", simpleDateFormat.parse(wt.getCreateAt()).toString());
+                    createAtDate = simpleDateFormat.parse(wt.getCreateAt().toString());
+                    if (createAtDate.compareTo(currentDate)<0) {
+                        deleteWeaherByCurrentDateTime(context, wt.getId());
+                        Log.d("delete", "delete successful");
+                        insertDataToSQLite(context, minTemp, maxTemp, mainTemp, descriptionTemp);
+                        Log.d("Msg", "Weather " + wt.getId() + " before current date " + wt.getCreateAt().toString());
+                        Log.d("Count1", String.valueOf(weathers.size()));
+                        Log.d("_id", wt.getId() + "");
+                    }
                 }
-            }
 
 
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        insertDataToSQLite(context, minTemp, maxTemp, mainTemp, descriptionTemp);
-
+        Log.d("count" , String.valueOf(sqliteOpenDbHelper.getWeatherCount()));
 
 }
 
@@ -94,10 +100,10 @@ public class StorageDataBroadCastReceive extends BroadcastReceiver {
     }
 
     //Phuong thuc xoa du lieu theo ID
-    private void deleteWeaherByCurrentDateTime(Context context, Long id)
+    private void deleteWeaherByCurrentDateTime(Context context, Integer id)
     {
         sqliteOpenDbHelper = new WeatherDBHelper(context);
         database = sqliteOpenDbHelper.getWritableDatabase();
-        database.delete(WeatherDBHelper.WEATHER_TABLE_NAME, "id = ?", new String[] {Long.toString(id)});
+        database.delete(WeatherDBHelper.WEATHER_TABLE_NAME, WeatherDBHelper._ID + " = ?", new String[] {String.valueOf(id)});
     }
 }
