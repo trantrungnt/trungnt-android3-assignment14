@@ -4,6 +4,10 @@
 + [Cái tiến bài The Weather sử dụng api dữ liệu Thời tiết Hà Nội và có lưu vào SQL Lite](https://github.com/trantrungnt/LearnTheWeather)
 + App của mình mỗi ngày sau khi lấy dữ liệu mới về thì xóa toàn bộ dữ liệu cũ hơn 1 ngày.(dữ liệu lấy từ api đọc mới xong thì lưu vào SQL Lite)
 
+##Demo chương trình
++ [Xem tại đây](https://youtu.be/UC7mI1TTmxs)
+
+
 ##Kiến thức cần để làm
 + [SQLite Basic](https://youtu.be/LS2fBgUiOSI)
 
